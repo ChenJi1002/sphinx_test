@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RV验证固件 &mdash; 文档项目模板 1.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8930e309"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="MyST Markdown 语法入门" href="../other/myst_markdown.html" />
+    <link rel="prev" title="Welcome to 文档项目模板’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            文档项目模板
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RV验证固件</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#m33dsp-dpll1-m33-192m-rv-533m-dsp-400m">M33、DSP均以默认频率运行，以DPLL1可配置频率为主，默认频率为M33-192M，RV-533M，DSP-400M</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hs-psramdpll3dpll1">将HS-PSRAM从DPLL3切换到DPLL1中，频率根据当前条件尽量配高频，默认运行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rvdpll3-dpll3rv">将RV挂载到DPLL3上，DPLL3的时钟源尽量只给RV使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rvmemtester-hs-psram">支持RV跑memtester，跑在HS-PSRAM上</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rv-rvmemtester">支持查看RV占用率，确保RV运行memtester正常</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rvm33ldo1-08v-dsp1-175v">将RV、M33内部LDO供电电压修改至1.08V，DSP内部供电保持1.175V不变</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id1">验证</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1、 M33、DSP 均以默认频率运行，以 DPLL1可配置频率为主 ，默认频率为M33-192M，RV-533M，DSP-400M；</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hs-psram-dpll3dpll1">2、将HS-PSRAM 从DPLL3切换到DPLL1中 ，频率根据当前条件 尽量配高频 ， 默认运行；</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3.1、将 RV挂载到DPLL3 上，DPLL3的时钟源尽量只给RV使用；</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#m33dpll3-dpll3m33">3.2、将 M33挂载到DPLL3 上，DPLL3的时钟源尽量只给M33使用；</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">4、支持 RV跑memtester ，跑在HS-PSRAM上；</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">5、支持查看RV占用率，确保RV运行memtester正常；</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#m33">M33验证固件</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id6">将M33挂载到DPLL3上，DPLL3的时钟源尽量只给M33使用</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#cpu">查看cpu频率</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#m33c906">M33和C906</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hpsram">HPSRAM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../other/myst_markdown.html">222222222</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">文档项目模板</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RV验证固件</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/r128验证固件/r128验证固件开发指南.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>pccli命令可以执行他核的命令，用法：</p>
+<p>rpccli [arm|dsp|rv] commandname [arg0 …]</p>
+<section id="rv">
+<h1>RV验证固件<a class="headerlink" href="#rv" title="此标题的永久链接"></a></h1>
+<section id="m33dsp-dpll1-m33-192m-rv-533m-dsp-400m">
+<h2>M33、DSP均以默认频率运行，以DPLL1可配置频率为主，默认频率为M33-192M，RV-533M，DSP-400M<a class="headerlink" href="#m33dsp-dpll1-m33-192m-rv-533m-dsp-400m" title="此标题的永久链接"></a></h2>
+<p>提供cpu频率查看cmd接口，补丁内容如下：</p>
+<p>源文件：<code class="docutils literal notranslate"><span class="pre">r128-dev/lichee/rtos/arch/risc-v/sun20iw2p1/cpufreq.c</span></code></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#include &lt;stdio.h&gt;
+#include &lt;console.h&gt;
+#include &lt;FreeRTOS.h&gt;int cmd_get_cpu_freq(void)
+{
+    uint32_t cpu_freq = 0;
+    int ret = 0;
+
+    /*get cpu frequency */
+    ret = get_cpu_freq(&amp;cpu_freq);
+    if (ret) {
+        printf(&quot;get_cpu_freq failed, ret: %d\n&quot;, ret);
+        return -1;
+    }
+    printf(&quot;get_cpu_freq ok, frequency: %d Hz\n&quot;, cpu_freq);
+    return 0;
+}
+FINSH_FUNCTION_EXPORT_CMD(cmd_get_cpu_freq, get_cpu_freq, get current cpu frequency);
+</pre></div>
+</div>
+</section>
+<section id="hs-psramdpll3dpll1">
+<h2>将HS-PSRAM从DPLL3切换到DPLL1中，频率根据当前条件尽量配高频，默认运行<a class="headerlink" href="#hs-psramdpll3dpll1" title="此标题的永久链接"></a></h2>
+<p><strong>更改HS-PSRAM频率的相关源文件：</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">r128-dev/lichee/brandy-2.0/spl/drivers/hpsram/hpsram.c</span></code></p>
+<p><strong>相关函数：</strong></p>
+<p>hpsram_init：开机默认初始化hpsram参数，其中包括了HPSRAM的PLL选择和频率设置。</p>
+<p>hpsram_clk_init：设置PSRAM的PLL来源，分频系数等。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>// sr32(REG_ADDR, num_bit, len, val);表示对寄存器地址REG_ADDR的num_bit:num_bit-1的位数赋值为val
+  static __inline void hpsram_clk_init(__dram_para_t *para)
+{
+    ...
+     if (((para-&gt;dram_tpr7&gt;&gt;0) &amp; 0x1) == 0) {
+        printf(&quot;DPLL1 is chosen\n&quot;);
+        sr32(DEV_CLK_CTRL,21,1,0);              //choose source DPLL1
+        sr32(DPLL1_OUT_CTRL,15,1,1); //enable DPLL1 clock output
+        sr32(DPLL3_OUT_CTRL,15,1,0); //disable DPLL3 clock output
+    } else {
+        printf(&quot;DPLL3 is chosen\n&quot;);
+        sr32(DEV_CLK_CTRL, 21, 1, 1);  //choose source DPLL3
+        // CCMU_AON DPLL LS clk
+        sr32(DPLL1_OUT_CTRL, 15, 1, 0); //disable DPLL1 clock output
+        sr32(DPLL3_OUT_CTRL, 15, 1, 1); //enable DPLL3 clock output
+    }
+    ...
+}
+</pre></div>
+</div>
+<p>从源代码中可以知道，HSPSRAM选择时钟来源可以选择DPLL1和DPLL3，通过para-&gt;dram_tpr7来决定，如果为0则选择DPLL1，如果为1则选择DPLL3。而dram_tpr7的值可以通过sys_config.fex来设置，如下：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>//sys_config.fex
+;for compatibility, provide the &#39;dram_para&#39; configuration. otherwise update_boot0 program will exit without writing boot0 header
+; hspsram init if (dram_clk != 0); lspsram init if ( dram_no_lpsram == 0)
+[dram_para]
+...
+dram_tpr7      = 0x0
+...
+</pre></div>
+</div>
+<p>另外，DPLL的时钟分频系数通过可以由以下代码设置：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>//choose DIV for ddr clk
+//CK1_HSPSRAM_DIV 0:M=3; 1:M=2.5; 2:M=2; 3:M=1
+sr32(DPLL1_OUT_CTRL,12,2,3);
+//CK3_HSPSRAM_DIV 00:M=3;01:M=2.5;10:M=2;11:M=1
+sr32(DPLL3_OUT_CTRL,12,2,3);
+</pre></div>
+</div>
+<p>要求中尽量将DPLL1设置高频，因此需要将分频系数设置为M=1。</p>
+</section>
+<section id="rvdpll3-dpll3rv">
+<h2>将RV挂载到DPLL3上，DPLL3的时钟源尽量只给RV使用<a class="headerlink" href="#rvdpll3-dpll3rv" title="此标题的永久链接"></a></h2>
+<p><strong>RV核的DPLL配置相关源文件：</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">r128-dev/lichee/rtos/arch/arm/armv8m/sun20iw2p1/sun20i.c</span></code></p>
+<p><strong>相关函数：</strong></p>
+<p>sun20i_boot_c906：启动c906时对其进行配置初始化，包括DPLL配置。</p>
+<p><strong>相关代码段：</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#define RISCV_PLL_CLK_SOURCE RISCV_DPLL3_CLK
+...
+#if (RISCV_PLL_CLK_SOURCE == RISCV_DPLL3_CLK)
+    clk_ck3_c906 = hal_clock_get(HAL_SUNXI_AON_CCU, CLK_CK3_C906);
+    ret = hal_clock_enable(clk_ck3_c906);
+    if (HAL_CLK_STATUS_OK != ret) {
+        ret = -1;
+        goto exit_with_put_dpll3_clk;
+    }
+
+    ret = hal_clk_set_rate(clk_ck3_c906, RISCV_PLL_CLK_FREQ);
+    if (HAL_CLK_STATUS_OK != ret) {
+        ret = -1;
+        goto exit_with_put_dpll3_clk;
+    }
+#endif
+
+#if (RISCV_PLL_CLK_SOURCE == RISCV_DPLL1_CLK)
+    //set clk_ck1_c906 clk to 480M
+    //sr32(CCMU_AON_BASE+0xa4,  4, 3, 0x1);
+    //set clk_ck1_c906 clk to 640M
+    //sr32(CCMU_AON_BASE+0xa4,  4, 3, 0x2);
+    ret = hal_clk_set_rate(clk_ck1_c906, RISCV_PLL_CLK_FREQ);
+    if (HAL_CLK_STATUS_OK != ret) {
+        ret = -1;
+        goto err2;
+    }
+#endif
+</pre></div>
+</div>
+<p>根据以上代码内容可知，C906选择DPLL由RISCV_PLL_CLK_SOURCE决定，只需要定义RISCV_PLL_CLK_SOURCE为RISCV_DPLL3_CLK即可完成将RV挂载到DPLL3上。</p>
+<p>执行<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">0x4004c4e0</span></code>查看寄存器的值为<code class="docutils literal notranslate"><span class="pre">0x00062191</span></code>，因此，以上设备有DSP和RV挂载在DPLL3上，其他设备挂载在DPLL1上，需要将DSP重新挂载在DPLL1上。</p>
+<p><img alt="DEV_CLK_CTRL寄存器" src="../_images/DEV_CLK_CTRL.png" /></p>
+<p>添加宏定义选择DSP挂载到DPLL1上，补丁内容如下：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>diff --git a/arch/arm/armv8m/sun20iw2p1/sun20i.c b/arch/arm/armv8m/sun20iw2p1/sun20i.c
+index 00999ef33..41d94f419 100755
+--- a/arch/arm/armv8m/sun20iw2p1/sun20i.c
++++ b/arch/arm/armv8m/sun20iw2p1/sun20i.c
+@@ -951,6 +951,10 @@ err1:
+ }
+ #endif
+
++#define DSP_DPLL1_CLK 1
++#define DSP_DPLL3_CLK 3
++#define DSP_PLL_CLK_SOURCE DSP_DPLL1_CLK
++
+ #if defined(CONFIG_ARCH_ARMV8M_DEFAULT_BOOT_DSP) || defined(CONFIG_COMMAND_BOOT_DSP) \
+        || defined(CONFIG_PM_SUBSYS_DSP_SUPPORT)
+ #define DSP_CORE_CLOCK_FREQ CONFIG_DSP_CLOCK_FREQ
+@@ -999,9 +1003,25 @@ int __sun20i_boot_dsp_with_start_addr(uint32_t dsp_start_addr)
+         goto err2;
+     }
+
+-    //set clk_ck1_hifi5 clk to 384M
+-    /* sr32(CCMU_AON_BASE+0xa4,  8, 3, 0x2); */
++#if (DSP_PLL_CLK_SOURCE == DSP_DPLL1_CLK)
++#define DSP_CORE_CLOCK_FREQ 384000000
++    // set clk_ck1_hifi5 clk to 384M
++    // sr32(CCMU_AON_BASE+0xa4,  8, 3, 0x2);
++    ret = hal_clk_set_rate(clk_ck1_hifi5, DSP_CORE_CLOCK_FREQ);
++    if (HAL_CLK_STATUS_OK != ret) {
++        ret = -1;
++        goto err1;
++    }
+
++       /*set clk_ck_hifi5 source to clk_ck1_hifi5*/
++    // sr32(CCMU_AON_BASE+0xe0, 18, 1, 0x0);
++    clk_ck_hifi5 = hal_clock_get(HAL_SUNXI_AON_CCU, CLK_CKPLL_HIFI5_SEL);
++    ret = hal_clk_set_parent(clk_ck_hifi5, clk_ck1_hifi5);
++    if (HAL_CLK_STATUS_OK != ret) {
++        ret = -1;
++        goto err3;
++    }
++#else
+     //set clk_ck3_hifi5 clk to 400M
+     //sr32(CCMU_AON_BASE+0xa8,  8, 3, 0x3);
+     ret = hal_clk_set_rate(clk_ck3_hifi5, DSP_CORE_CLOCK_FREQ);
+@@ -1018,6 +1038,7 @@ int __sun20i_boot_dsp_with_start_addr(uint32_t dsp_start_addr)
+         ret = -1;
+         goto err3;
+     }
++#endif
+
+     //set clk_ck_hifi5_div source to clk_ck_hifi5
+     //sr32(CCMU_BASE+0x068, 4, 2, 0x2);
+</pre></div>
+</div>
+<p>重新执行<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">0x4004c4e0</span></code>查看寄存器的值为0x00022191，可以知道DSP已成功挂载到DPLL1上了。</p>
+</section>
+<section id="rvmemtester-hs-psram">
+<h2>支持RV跑memtester，跑在HS-PSRAM上<a class="headerlink" href="#rvmemtester-hs-psram" title="此标题的永久链接"></a></h2>
+<p><strong>支持RV跑memtester</strong></p>
+<p>用法：memtester -s {内存大小} [-m testmask] [-t 循环次数]</p>
+<p>比如：<code class="docutils literal notranslate"><span class="pre">memtester</span> <span class="pre">-s</span> <span class="pre">8k</span> <span class="pre">-t</span> <span class="pre">2</span></code></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&quot;Usage: %s -s &lt;size&gt;[B|K|M|G] [-m testmask] [-t times]\n&quot;
+&quot;\n&quot;
+&quot;[testmask]: specify tests which we want run.\n&quot;
+&quot;bit0  Compare XOR\n&quot;
+&quot;bit1  Compare SUB\n&quot;
+&quot;bit2  Compare MUL\n&quot;
+&quot;bit3  Compare DIV\n&quot;
+&quot;bit4  Compare OR\n&quot;
+&quot;bit5  Compare AND\n&quot;
+&quot;bit6  Sequential Increment\n&quot;
+&quot;bit7  Solid Bits\n&quot;
+&quot;bit8  Block Sequential\n&quot;
+&quot;bit9  Checkerboard\n&quot;
+&quot;bit10 Bit Spread\n&quot;
+&quot;bit11 Bit Flip\n&quot;
+&quot;bit12 Walking Ones\n&quot;
+&quot;bit13 Walking Zeroes\n&quot;
+&quot;bit14 8-bit Writes(ifdef TEST_NARROW_WRITE)\n&quot;
+&quot;bit15 16-bit Writes(ifdef TEST_NARROW_WRITE)\n&quot;
+&quot;\n&quot;
+&quot;eg:\n&quot;
+&quot;    memtester -s 10M -m 0xc -t 1\n&quot;
+&quot;    means run Compare DIV&amp;MUL tests only to test 10M memory loop 1 time.\n&quot;,
+</pre></div>
+</div>
+<p><strong>RV跑在HS-PSRAM上</strong></p>
+<p>RV核有可能跑在HS-PSRAM或者SRAM上，可以通过加载地址确认。</p>
+<p>根据memory mapping图，HS-PSRAM起始地址为0x0C开头，SRAM起始地址为0x04开头，因此通过打印RV核的起始地址即可判断RV核运行在哪个位置上。</p>
+<p><img alt="HPSRAM地址范围" src="../_images/HPSRAM_Address.png" /></p>
+<p>RV核启动地址相关代码：</p>
+<p>相关代码源文件：<code class="docutils literal notranslate"><span class="pre">r128-dev/lichee/rtos/arch/arm/armv8m/sun20iw2p1/sun20i.c</span></code></p>
+<p>相关源代码：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>int sun20i_boot_c906(void)
+{
+...
+    #if CONFIG_ARCH_RISCV_START_ADDRESS
+        put_wvalue(RISCV_CFG_BASE + 0x004, CONFIG_ARCH_RISCV_START_ADDRESS);
+    #else
+        put_wvalue(RISCV_CFG_BASE + 0x004, rtos_spare_head.reserved[0]);
+    #endif
+...
+}
+</pre></div>
+</div>
+<p>可通过插入打印CONFIG_ARCH_RISCV_START_ADDRESS的值直接确定RV核的起始地址，从而确定运行位置。</p>
+<p>也可以直接根据boot0启动时输出的log来确定：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[294]loadparts:arm-hpsram@:rv-hpsram@:dsp-hpsram@:config@0xc000000
+[300]load_start_sector=41008
+[303]load arm-hpsram to 0xc004000 from 20996224, size 1186320
+[308]load_start_sector=41008, load_sectors=2317, loadaddr=0x0c004000,first_part_size=0x00000180
+[419]load_start_sector=43408
+[422]load rv-hpsram to 0xc200000 from 22225024, size 4031544
+[428]load_start_sector=43408, load_sectors=7874, loadaddr=0x0c200000,first_part_size=0x00000180
+[783]load_start_sector=51288
+[786]load dsp-hpsram to 0xd800000 from 26259584, size 503924
+[792]load_start_sector=51288, load_sectors=984, loadaddr=0x0d800000,first_part_size=0x00000180
+[844]load_start_sector=55288
+</pre></div>
+</div>
+<p>通过打印可知，RV核的起始地址为0xc200000，ARM核的起始地址为 0x0c00400，故而可以RV和ARM都已经运行在HS-PSRAM上。</p>
+</section>
+<section id="rv-rvmemtester">
+<h2>支持查看RV占用率，确保RV运行memtester正常<a class="headerlink" href="#rv-rvmemtester" title="此标题的永久链接"></a></h2>
+</section>
+<section id="rvm33ldo1-08v-dsp1-175v">
+<h2>将RV、M33内部LDO供电电压修改至1.08V，DSP内部供电保持1.175V不变<a class="headerlink" href="#rvm33ldo1-08v-dsp1-175v" title="此标题的永久链接"></a></h2>
+<p>相关源文件：<code class="docutils literal notranslate"><span class="pre">r128-dev/lichee/rtos/arch/risc-v/sun20iw2p1/cpufreq.c</span></code></p>
+<p>相关接口：</p>
+<p>set_cpu_voltage：设置当前cpu LDO电压</p>
+<p>get_cpu_voltage：获取当前cpu LDO电压</p>
+<p>在上面接口基础上添加cmd接口，补丁内容如下：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>diff --git a/arch/risc-v/sun20iw2p1/cpufreq.c b/arch/risc-v/sun20iw2p1/cpufreq.c
+index e5329c00f..1a2a58b32 100644
+--- a/arch/risc-v/sun20iw2p1/cpufreq.c
++++ b/arch/risc-v/sun20iw2p1/cpufreq.c
+@@ -32,6 +32,9 @@
+
+ #include &quot;cpufreq.h&quot;
+ #include &lt;hal_clk.h&gt;
++#include &lt;stdio.h&gt;
++#include &lt;console.h&gt;
++#include &lt;FreeRTOS.h&gt;
+ #ifdef CONFIG_DRIVERS_EFUSE
+ #include &lt;sunxi_hal_efuse.h&gt;
+ #endif
+@@ -156,6 +159,42 @@ int get_cpu_voltage(uint32_t *cpu_voltage)
+        return 0;
+ }
+
++static int cmd_set_cpu_voltage(int argc, const char **argv)
++{
++       uint32_t vol = 0;
++       int ret = 0;
++       if (argv[1] == NULL) {
++               printf(&quot;please input cpu voltage (mV)\n&quot;);
++               return -1;
++       }
++
++       vol = strtol(argv[1], NULL, 0);
++       ret = set_cpu_voltage(vol);
++       if (ret) {
++               printf(&quot;set_cpu_voltage failed, ret: %d\n&quot;, ret);
++               return -1;
++       }
++       printf(&quot;set_cpu_voltage ok, voltage: %d mV\n&quot;, vol);
++       return 0;
++}
++FINSH_FUNCTION_EXPORT_CMD(cmd_set_cpu_voltage, set_cpu_voltage, set current cpu voltage);
++
++static int cmd_get_cpu_voltage(void)
++{
++       uint32_t cpu_voltage = 0;
++       int ret = 0;
++
++       /*get cpu voltage */
++       ret = get_cpu_voltage(&amp;cpu_voltage);
++       if (ret) {
++               printf(&quot;get_cpu_voltage failed, ret: %d\n&quot;, ret);
++               return -1;
++       }
++       printf(&quot;get_cpu_voltage ok, voltage: %d mV\n&quot;, cpu_voltage);
++       return 0;
++}
++FINSH_FUNCTION_EXPORT_CMD(cmd_get_cpu_voltage, get_cpu_voltage, get current cpu voltage);
++
+ static int set_first_div_freq(uint32_t target_freq, hal_clk_t next_clk)
+ {
+        int ret = 0;
+@@ -339,3 +378,20 @@ int cpufreq_vf_init(void)
+
+        return 0;
+ }
+</pre></div>
+</div>
+<p>测试：</p>
+<p>设置LDO电压为1.08V：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c906&gt;set_cpu_voltage 1080
+set_cpu_voltage ok, voltage: 1080 mV
+
+c906&gt;get_cpu_voltage
+get_cpu_voltage ok, voltage: 1100 mV 
+</pre></div>
+</div>
+<p>设置LDO电压1.08V成功，但是最后读取出来的LDO电压为1.1V。</p>
+<p>原因：</p>
+<p>根据宏定义#define VOLTAGE_STEP 25以及set_cpu_voltage函数的具体实现：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ldo_vol_field = ldo_cal + ((int)vol - LDO_CAL_BASE) / VOLTAGE_STEP;
+</pre></div>
+</div>
+<p>可以知道步进电压为25mV，也就是设置的电压必须为25mV的整数倍，因此最接近1.08V的电压为1.075V，可以尝试设置LDO电压值为1075。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c906&gt;set_cpu_voltage 1075
+set_cpu_voltage ok, voltage: 1075 mV
+
+c906&gt;get_cpu_voltage
+get_cpu_voltage ok, voltage: 1075 mV
+</pre></div>
+</div>
+<p>可以看到成功设置为LDO电压为1.075V。</p>
+</section>
+</section>
+<section id="id1">
+<h1>验证<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h1>
+<section id="id2">
+<h2>1、 M33、DSP 均以默认频率运行，以 DPLL1可配置频率为主 ，默认频率为M33-192M，RV-533M，DSP-400M；<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h2>
+<p><strong>M33固件下，重启查看log：</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>M33 CPU Clock Freq: 192 MHz
+C906 CPU Freq: 480 MHz
+DSP core clock frequency: 384000000Hz
+</pre></div>
+</div>
+<p><strong>RV固件下，重启查看log：</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>M33 CPU Clock Freq: 192 MHz
+C906 CPU Freq: 533 MHz
+DSP core clock frequency: 384000000Hz
+</pre></div>
+</div>
+</section>
+<section id="hs-psram-dpll3dpll1">
+<h2>2、将HS-PSRAM 从DPLL3切换到DPLL1中 ，频率根据当前条件 尽量配高频 ， 默认运行；<a class="headerlink" href="#hs-psram-dpll3dpll1" title="此标题的永久链接"></a></h2>
+<p><strong>在RV或者M33固件下，执行以下命令：</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c906&gt;p 0x4004c4e0 //读取system clock control寄存器
+reg_addr[0x4004c4e0]=0x00022191  //bit21为0，说明HS-PSRAM时钟源为DPLL1
+</pre></div>
+</div>
+<p><img alt="CKPLL_HSPSRAM_SEL" src="../_images/CKPLL_HSPSRAM_SEL.png" /></p>
+</section>
+<section id="id3">
+<h2>3.1、将 RV挂载到DPLL3 上，DPLL3的时钟源尽量只给RV使用；<a class="headerlink" href="#id3" title="此标题的永久链接"></a></h2>
+<p><strong>在RV固件下，执行以下命令：</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c906&gt;p 0x4004c4e0 //读取system clock control寄存器
+reg_addr[0x4004c4e0]=0x00022191  //bit17为1，说明RV时钟源为DPLL3
+</pre></div>
+</div>
+<p><img alt="CKPLL_C906_SEL" src="../_images/CKPLL_C906_SEL.png" /></p>
+<p>bit18~bit21为0，表示HSPSRAM、LSPSRAM、M33、DSP的时钟源都是DPLL1，DPLL3的时钟源只给RV使用。</p>
+</section>
+<section id="m33dpll3-dpll3m33">
+<h2>3.2、将 M33挂载到DPLL3 上，DPLL3的时钟源尽量只给M33使用；<a class="headerlink" href="#m33dpll3-dpll3m33" title="此标题的永久链接"></a></h2>
+<p><strong>在M33固件下，执行以下命令：</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c906&gt;p 0x4004c4e0//读取system clock control寄存器
+reg_addr[0x4004c4e0]=0x00082191//bit19为1，说明M33时钟源为DPLL3
+</pre></div>
+</div>
+<p><img alt="CKPLL_M33_SEL" src="../_images/CKPLL_M33_SEL.png" /></p>
+<p>bit18、bit20和bit21为0，表示HSPSRAM、LSPSRAM、RV、DSP的时钟源都是DPLL1，DPLL3的时钟源只给M33使用。</p>
+</section>
+<section id="id4">
+<h2>4、支持 RV跑memtester ，跑在HS-PSRAM上；<a class="headerlink" href="#id4" title="此标题的永久链接"></a></h2>
+<p><strong>在RV或者M33固件下，执行以下命令：</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c906&gt;memtester -s 8k -t 1
+memtester version 4.3.0 (64-bit)
+Copyright (C) 2001-2012 Charles Cazabon.
+Licensed under the GNU General Public License version 2 (only).
+
+sysconf(_SC_PAGE_SIZE) not supported; using pagesize of 8192
+memsuffix k
+want 0MB (8192 bytes)
+got  0MB (8192 bytes) in 0xc643d20Loop 1/1:
+&lt;============Prepare============&gt;
+  Stuck Address       : ok
+  Random Value        :  ok
+&lt;============Start test============&gt;
+  Compare XOR         : ok
+  Compare SUB         : ok
+  Compare MUL         : ok
+  Compare DIV         : ok
+  Compare OR          : ok
+  Compare AND         : ok
+  Sequential Increment: ok
+  Solid Bits          : ok
+  Block Sequential    : ok
+  Checkerboard        : ok
+  Bit Spread          : ok
+  Bit Flip            : ok
+  Walking Ones        : ok
+  Walking Zeroes      : ok
+
+Done.
+
+c906&gt;rpccli arm memtester -s 8k -t 1 
+memtester version 4.3.0 (32-bit)
+Copyright (C) 2001-2012 Charles Cazabon.
+Licensed under the GNU General Public License version 2 (only).
+
+sysconf(_SC_PAGE_SIZE) not supported; using pagesize of 8192
+memsuffix k
+want 0MB (8192 bytes)
+got  0MB (8192 bytes) in 0xa5a5a5a50c13c220Loop 1/1:
+&lt;============Prepare============&gt;
+  Stuck Address       : ok
+  Random Value        :  ok
+&lt;============Start test============&gt;
+  Compare XOR         : ok
+  Compare SUB         : ok
+  Compare MUL         : ok
+  Compare DIV         : ok
+  Compare OR          : ok
+  Compare AND         : ok
+  Sequential Increment: ok
+  Solid Bits          : ok
+  Block Sequential    : ok
+  Checkerboard        : ok
+  Bit Spread          : ok
+  Bit Flip            : ok
+  Walking Ones        : ok
+  Walking Zeroes      : ok
+
+Done.
+</pre></div>
+</div>
+<p>查看RV核和M33核的启动地址：</p>
+<p><img alt="RISCV_CPU_Start_Address" src="../_images/RISCV_CPU_Start_Address.png" /></p>
+<p>地址为0xC开头，表明RV和M33都运行在RPSRAM中。</p>
+</section>
+<section id="id5">
+<h2>5、支持查看RV占用率，确保RV运行memtester正常；<a class="headerlink" href="#id5" title="此标题的永久链接"></a></h2>
+<p><strong>RV或M33固件下，直接运行run-time-stats</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c906&gt;run-time-stats
+Task            Abs Time      % Time
+****************************************
+CLI             616             &lt;1%
+IDLE            516619          99%
+adbd-input      0               &lt;1%
+tcpip           0               &lt;1%
+nand_rcd        0               &lt;1%
+nftld           0               &lt;1%
+amp-admin       0               &lt;1%
+Tmr Svc         0               &lt;1%
+amp-ser1        0               &lt;1%
+amp-ser2        0               &lt;1%
+amp-ser3        0               &lt;1%
+amp-ser4        0               &lt;1%
+pm_suspend      0               &lt;1%
+hub-main-thread 0               &lt;1%
+amp-send-task   0               &lt;1%
+amp-recv-task   0               &lt;1%
+udc_vbus_det    0               &lt;1%
+adbd-output     1               &lt;1%
+AudioMT2        0               &lt;1%
+cpu_zone        0               &lt;1%
+disp2           258             &lt;1%
+amp-ser0        0               &lt;1%
+</pre></div>
+</div>
+<p>6、 将RV、M33内部LDO供电电压修改至1.08V，DSP内部LDO供电保持1.175V不变；</p>
+<p><strong>RV固件下：</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c906&gt;set_cpu_voltage 1075 //设置RV内部LDO供电电压
+set_cpu_voltage ok, voltage: 1075 mV
+
+c906&gt;get_cpu_voltage  //读取RV内部LDO供电电压
+get_cpu_voltage ok, voltage: 1075 mV 
+</pre></div>
+</div>
+<p><strong>M33固件下：</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c906&gt;rpccli arm set_cpu_voltage 1075 //设置M33内部LDO供电电压
+set_cpu_voltage ok, voltage: 1075 mV
+
+c906&gt;rpccli arm get_cpu_voltage //读取M33内部LDO供电电压
+get_cpu_voltage ok, voltage: 1075 mV
+</pre></div>
+</div>
+</section>
+</section>
+<section id="m33">
+<h1>M33验证固件<a class="headerlink" href="#m33" title="此标题的永久链接"></a></h1>
+<section id="id6">
+<h2>将M33挂载到DPLL3上，DPLL3的时钟源尽量只给M33使用<a class="headerlink" href="#id6" title="此标题的永久链接"></a></h2>
+<p>相关源代码文件：<code class="docutils literal notranslate"><span class="pre">r128-dev/lichee/rtos/arch/arm/armv8m/sun20iw2p1/sun20i.c</span></code></p>
+<p>相关函数：<code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">int</span> <span class="pre">ar200a_clk_set(u32</span> <span class="pre">freq)</span></code></p>
+<p>相关代码补丁：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>diff --git a/arch/arm/armv8m/sun20iw2p1/sun20i.c b/arch/arm/armv8m/sun20iw2p1/sun20i.c
+index 1c7cb1abd..509f3b516 100755
+--- a/arch/arm/armv8m/sun20iw2p1/sun20i.c
++++ b/arch/arm/armv8m/sun20iw2p1/sun20i.c
+@@ -173,12 +173,16 @@ err:
+  * we fixed ck1_m33 to 384M,
+  * so freq only support 384M,192M,128M,96M,64M,48M,32M,24M
+  */
++ #define M33_DPLL1_CLK 1
++ #define M33_DPLL3_CLK 3
++ #define M33_PLL_CLK_SOURCE M33_DPLL3_CLK
+ static int ar200a_clk_set(u32 freq)
+ {
+        u32 rate;
+-       hal_clk_t clk_ck1_m33, clk_ck_m33, clk_sys, clk_ar200a_f;
++       hal_clk_t clk_ck1_m33, clk_ck3_m33, clk_ck_m33, clk_sys, clk_ar200a_f;
+        hal_clk_status_t ret = 0;
+
++#if (M33_PLL_CLK_SOURCE == M33_DPLL1_CLK)
+        /*set ck1_m33_clk*/
+        //sr32(CCMU_AON_BASE+0xa4,  3, 1, 1);
+        //0x4004c4a4: 0x80800008
+@@ -207,12 +211,25 @@ static int ar200a_clk_set(u32 freq)
+                ret = -1;
+                goto err3;
+        }
+-
++       printf(&quot;M33: chose clock source to DPLL1\n&quot;);
++#else
++       printf(&quot;DPLL3\n&quot;);
++       /*enable ck3_m33_clk*/
++       sr32(CCMU_AON_BASE+0xa8,  3, 1, 1);
++       //0x4004c4a4: 0x80800008
++       /*fixed 384M*/
++       sr32(CCMU_AON_BASE+0xa8,  0, 3, 0x3);
++       //0x4004c4a4: 0x8080000b
++       /*set ck_m33_clk*/
++       sr32(CCMU_AON_BASE+0xe0, 19, 1, 1);
++       //0x4004c4e0: 0x00000101
++       printf(&quot;M33: chose clock source to DPLL3\n&quot;);
++#endif
+        /*set sys_clk*/
+        //sr32(CCMU_AON_BASE+0xe0,  8, 4, 0x7);
+        //0x4004c4e0: 0x00000701
+        clk_sys = hal_clock_get(HAL_SUNXI_AON_CCU, CLK_SYS);
+-       ret = hal_clk_set_rate(clk_sys, freq);
++       ret = hal_clk_set_rate(clk_sys, freq); //freq=192MHz
+        if (HAL_CLK_STATUS_OK != ret) {
+                ret = -1;
+                goto err4;
+...
+</pre></div>
+</div>
+</section>
+</section>
+<section id="cpu">
+<h1>查看cpu频率<a class="headerlink" href="#cpu" title="此标题的永久链接"></a></h1>
+<section id="m33c906">
+<h2>M33和C906<a class="headerlink" href="#m33c906" title="此标题的永久链接"></a></h2>
+<p><strong>（1）确定HOSC时钟源：</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p 0x4004c484 //查看bit0:2的值， 根据下面信息直接确定f_hosc的值
+</pre></div>
+</div>
+<p><img alt="hosc寄存器" src="../_images/hosc_reg.png" /></p>
+<p><strong>（2）确定DPLL3的时钟频率：</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p 0x4004c494 //f_dpll3=(f_hosc*N)/M，N由bit4:11决定，M由0:3决定
+</pre></div>
+</div>
+<p><img alt="DPLL3控制寄存器" src="../_images/DPLL3_REG.png" /></p>
+<p><strong>（3）确定M33的频率</strong></p>
+<p><img alt="M33频率" src="../_images/M33_freq.png" /></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c906&gt;p 0x4004c4a8 //查看bit0:2的值，直接确定分频系数M，那么f_m33=f_dpll3/M
+</pre></div>
+</div>
+<p><strong>（4）确定C906的频率</strong></p>
+<p><img alt="C906频率" src="../_images/C906_freq.png" /></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c906&gt;p 0x4004c4a8 //查看bit4:6的值，直接确定分频系数M，那么f_c906=f_dpll3/M
+</pre></div>
+</div>
+</section>
+<section id="hpsram">
+<h2>HPSRAM<a class="headerlink" href="#hpsram" title="此标题的永久链接"></a></h2>
+<p><img alt="CK1_HPSRAM" src="../_images/CK1_HPSRAM_REG.png" /></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p 0x4004c4a8 //查看分频系数M，直接计算f_hpsram=f_dpll1/M
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to 文档项目模板’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../other/myst_markdown.html" class="btn btn-neutral float-right" title="MyST Markdown 语法入门" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2025, AWA2253。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

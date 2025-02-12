@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyST Markdown 语法入门 &mdash; 文档项目模板 1.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8930e309"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="RV验证固件" href="../r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6/r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            文档项目模板
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6/r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.html">RV验证固件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6/r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.html#id1">验证</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6/r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.html#m33">M33验证固件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6/r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.html#cpu">查看cpu频率</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">222222222</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">提示框</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">标题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">有序列表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">无序列表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">文本换行</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">无效换行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">段内换行</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">新段落</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">字体样式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">单行块引用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">多行块引用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">代码块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">文件中的代码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">数学公式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">脚注</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">嵌入图像</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id19">超链接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id20">表格</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">文档项目模板</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MyST Markdown 语法入门</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/other/myst_markdown.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="myst-markdown">
+<h1>MyST Markdown 语法入门<a class="headerlink" href="#myst-markdown" title="此标题的永久链接"></a></h1>
+<p>MyST Markdown, MyST（全称 Markedly Structured Text）专为 Sphinx 项目使用而设计的 Markdown 风格。 它是 CommonMark Markdown 和一些额外的语法片段的组合，以支持 Sphinx 的功能，因此您可以用纯 Markdown 编写 Sphinx 文档。</p>
+<p><a class="reference external" href="https://myst-parser.readthedocs.io">MyST-Parser官网语法教程</a></p>
+<section id="id1">
+<h2>提示框<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h2>
+<p>警告提示框（Admonition）突出显示与页面叙述稍有不同的特定文本块，例如注释或警告。</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>:::{tip}
+给读者一些有用的提示吧！
+:::
+
+:::{note}
+这是一个笔记
+:::
+
+
+:::{caution}
+这是一个警告
+:::
+
+:::{error}
+这是一个错误
+:::
+</pre></div>
+</div>
+<p>显示效果</p>
+<p>:::{tip}
+给读者一些有用的提示吧！
+:::</p>
+<p>:::{note}
+这是一个笔记
+:::</p>
+<p>:::{caution}
+这是一个警告
+:::</p>
+<p>:::{error}
+这是一个错误
+:::</p>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>标题<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h2>
+<p>为了兼容考虑，用一个空格在 <code class="docutils literal notranslate"><span class="pre">#</span></code> 和标题之间进行分隔。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 一级标题</span>
+
+<span class="c1">## 二级标题</span>
+
+<span class="c1">### 三级标题</span>
+
+<span class="c1">#### 四级标题</span>
+
+<span class="c1">##### 五级标题</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>有序列表<a class="headerlink" href="#id3" title="此标题的永久链接"></a></h2>
+<p>要创建有序列表，请在每个列表项前添加数字并紧跟一个英文句点。<br />
+数字不必按数学顺序排列，但是列表应当以数字 1 起始。</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="k">1.</span> 条目1
+<span class="k">2.</span> 条目2
+<span class="k">3.</span> 条目3
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>缩进条目
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>缩进条目
+</pre></div>
+</div>
+<p>显示效果</p>
+<ol class="arabic simple">
+<li><p>条目1</p></li>
+<li><p>条目2</p></li>
+<li><p>条目3</p>
+<ul class="simple">
+<li><p>缩进条目</p></li>
+<li><p>缩进条目</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>无序列表<a class="headerlink" href="#id4" title="此标题的永久链接"></a></h2>
+<p>要创建无序列表，请在每个列表项前面添加破折号 (-)、星号 (*) 或加号 (+) 。缩进一个或多个列表项可创建嵌套列表。</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="k">-</span><span class="w"> </span>条目1
+<span class="k">-</span><span class="w"> </span>条目2
+<span class="k">-</span><span class="w"> </span>条目3
+<span class="k">-</span><span class="w"> </span>条目4
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>缩进条目
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>缩进条目
+
+<span class="k">*</span><span class="w"> </span>条目1
+<span class="k">*</span><span class="w"> </span>条目2
+<span class="k">*</span><span class="w"> </span>条目3
+<span class="k">*</span><span class="w"> </span>条目4
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>缩进条目
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>缩进条目
+
++ 条目1
++ 条目2
++ 条目3
++ 条目4
+    + 缩进条目
+    + 缩进条目
+</pre></div>
+</div>
+<p>显示效果</p>
+<ul class="simple">
+<li><p>条目1</p></li>
+<li><p>条目2</p></li>
+<li><p>条目3</p></li>
+<li><p>条目4</p>
+<ul>
+<li><p>缩进条目</p></li>
+<li><p>缩进条目</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>条目1</p></li>
+<li><p>条目2</p></li>
+<li><p>条目3</p></li>
+<li><p>条目4</p>
+<ul>
+<li><p>缩进条目</p></li>
+<li><p>缩进条目</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>条目1</p></li>
+<li><p>条目2</p></li>
+<li><p>条目3</p></li>
+<li><p>条目4</p>
+<ul>
+<li><p>缩进条目</p></li>
+<li><p>缩进条目</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h2>文本换行<a class="headerlink" href="#id5" title="此标题的永久链接"></a></h2>
+<p><strong>Markdown中在段落前不要用空格（spaces）或制表符（ tabs）缩进段落。</strong></p>
+<section id="id6">
+<h3>无效换行<a class="headerlink" href="#id6" title="此标题的永久链接"></a></h3>
+<p>在一行结尾没有加空格时，后一行内容会自动追加显示在前一行</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>This is the first line.  
+And this is the second line.
+</pre></div>
+</div>
+<p>显示效果</p>
+<p>This is the first line.
+And this is the second line.</p>
+</section>
+<section id="id7">
+<h3>段内换行<a class="headerlink" href="#id7" title="此标题的永久链接"></a></h3>
+<p>要在没有段落的情况下换行，使用<strong>两个或多个空格</strong>进行换行，称为 结尾空格（trailing whitespace)</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>This is the first line.  
+And this is the second line.
+</pre></div>
+</div>
+<p>显示效果</p>
+<p>This is the first line.</p>
+<p>And this is the second line.</p>
+</section>
+<section id="id8">
+<h3>新段落<a class="headerlink" href="#id8" title="此标题的永久链接"></a></h3>
+<p>两行之间<strong>间隔一行</strong>，即可新增段落</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>This is the first line.
+
+And this is the second line.
+</pre></div>
+</div>
+<p>显示效果</p>
+<p>This is the first line.</p>
+<p>And this is the second line.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id9">
+<h2>字体样式<a class="headerlink" href="#id9" title="此标题的永久链接"></a></h2>
+<p>要加粗文本，在短语前后各添加<strong>两个</strong>星号<code class="docutils literal notranslate"><span class="pre">*</span></code>或下划线<code class="docutils literal notranslate"><span class="pre">_</span></code><br />
+要斜体文本，在短语前后各添加<strong>一个</strong>星号<code class="docutils literal notranslate"><span class="pre">*</span></code>或下划线<code class="docutils literal notranslate"><span class="pre">_</span></code><br />
+要同时用粗体和斜体突出显示文本，在短语前后各添加<strong>三个</strong>星号<code class="docutils literal notranslate"><span class="pre">*</span></code>或下划线<code class="docutils literal notranslate"><span class="pre">_</span></code><br />
+删除线在PDF中不可用</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="ge">*斜体*</span> 
+
+<span class="ge">_斜体_</span>
+
+<span class="gs">**粗体**</span>
+
+<span class="gs">__粗体__</span>
+
+***粗体+斜体***
+
+___粗体+斜体___
+
+
+H{sub}`2`O, and 4{sup}`th` of July
+</pre></div>
+</div>
+<p>显示效果</p>
+<p><em>斜体</em></p>
+<p><em>斜体</em></p>
+<p><strong>粗体</strong></p>
+<p><strong>粗体</strong></p>
+<p><em><strong>粗体+斜体</strong></em></p>
+<p><em><strong>粗体+斜体</strong></em></p>
+<p>H<sub>2</sub>O, and 4<sup>th</sup> of July</p>
+</section>
+<hr class="docutils" />
+<section id="id10">
+<h2>单行块引用<a class="headerlink" href="#id10" title="此标题的永久链接"></a></h2>
+<p>要创建块引用，请在段落前添加一个<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>符号。</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="k">&gt; </span><span class="ge">这是一个引用块</span>
+</pre></div>
+</div>
+<p>显示效果</p>
+<blockquote>
+<div><p>这是一个引用块</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="id11">
+<h2>多行块引用<a class="headerlink" href="#id11" title="此标题的永久链接"></a></h2>
+<p>块引用可以包含多个段落。为段落之间的空白行添加一个 <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>符号。</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="k">&gt; </span><span class="ge">呼啸的秋风让人无限忧愁，进也忧愁，退也忧愁。</span>
+&gt; 
+<span class="k">&gt; </span><span class="ge">异域戍边的人，哪个不陷入悲愁中？真是愁白了头啊。</span>
+&gt; 
+<span class="k">&gt; </span><span class="ge">胡人之处多狂风，树木萧瑟干枯。</span>
+</pre></div>
+</div>
+<p>显示效果</p>
+<blockquote>
+<div><p>呼啸的秋风让人无限忧愁，进也忧愁，退也忧愁。</p>
+<p>异域戍边的人，哪个不陷入悲愁中？真是愁白了头啊。</p>
+<p>胡人之处多狂风，树木萧瑟干枯。</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="id12">
+<h2>代码块<a class="headerlink" href="#id12" title="此标题的永久链接"></a></h2>
+<p>在代码前和后的行上使用三个反引号<code class="docutils literal notranslate"><span class="pre">```</span></code>或三个波浪号<code class="docutils literal notranslate"><span class="pre">~~~</span></code>
+在代码块之前的反引号旁边指定一种语言，即可实现<strong>语法高亮</strong></p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="sb">    ```python</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">)</span>
+<span class="sb">    ```</span>
+
+    ~~~ json
+    {
+        &quot;firstName&quot;: &quot;John&quot;,
+        &quot;lastName&quot;: &quot;Smith&quot;,
+        &quot;age&quot;: 25
+    }
+    ~~~
+</pre></div>
+</div>
+<p>显示效果</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;firstName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lastName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Smith&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id13">
+<h2>文件中的代码<a class="headerlink" href="#id13" title="此标题的永久链接"></a></h2>
+<p>可以使用 literalinclude 指令从文件中包含更长的代码：<br />
+<strong>注意:</strong> ```和{literalinclude}之间不能有空格</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>    ```{literalinclude} quickstart.py
+    ```
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id14">
+<h2>数学公式<a class="headerlink" href="#id14" title="此标题的永久链接"></a></h2>
+<p>math角色和指令分别用于定义内联数学和块数学。<br />
+<strong>注意:</strong> ```和{math}之间不能有空格</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>    ```{math}
+    :label: mymath
+    (a + b)^2 = a^2 + 2ab + b^2
+
+    (a + b)^2  &amp;=  (a + b)(a + b) \\
+            &amp;=  a^2 + 2ab + b^2
+    ```
+</pre></div>
+</div>
+<p>显示效果</p>
+<div class="math notranslate nohighlight" id="equation-mymath">
+<span class="eqno">(1)<a class="headerlink" href="#equation-mymath" title="此公式的永久链接"></a></span>\[ \begin{align}\begin{aligned}(a + b)^2 = a^2 + 2ab + b^2\\\begin{split}(a + b)^2  &amp;=  (a + b)(a + b) \\
+           &amp;=  a^2 + 2ab + b^2\end{split}\end{aligned}\end{align} \]</div>
+</section>
+<hr class="docutils" />
+<section id="id15">
+<h2>脚注<a class="headerlink" href="#id15" title="此标题的永久链接"></a></h2>
+<p>脚注使用 pandoc 规范。它们的标签以 ^ 开头，然后可以是任何字母数字字符串（无空格），不区分大小写。</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="k">-</span><span class="w"> </span>This is a manually-numbered footnote reference.[^3]
+<span class="k">-</span><span class="w"> </span>This is an auto-numbered footnote reference.[^myref]
+
+[<span class="nl">^myref</span>]: <span class="na">This is an auto-numbered footnote definition.</span>
+[<span class="nl">^3</span>]: <span class="na">This is a manually-numbered footnote definition.</span>
+</pre></div>
+</div>
+<p>显示效果</p>
+<ul class="simple">
+<li><p>This is a manually-numbered footnote reference.<a class="footnote-reference brackets" href="#id21" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></li>
+<li><p>This is an auto-numbered footnote reference.<a class="footnote-reference brackets" href="#myref" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id18">
+<h2>嵌入图像<a class="headerlink" href="#id18" title="此标题的永久链接"></a></h2>
+<p>要添加图像，请使用感叹号 (!), 然后在方括号增加替代文本，图片链接放在圆括号里，括号里的链接后可以增加一个可选的图片标题文本。</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>![<span class="nt">这是图片</span>](<span class="na">_static/philly-magic-garden.jpg &quot;Magic Gardens&quot;</span>)
+
+    ```{image} _static/philly-magic-garden.jpg
+    :alt: philly magic garden
+    :class: bg-primary
+    :scale: 50 %
+    :align: center
+    ```
+</pre></div>
+</div>
+<p>显示效果</p>
+<p><img alt="这是图片" src="../_images/philly-magic-garden.jpg" /></p>
+<a class="bg-primary reference internal image-reference" href="../_images/philly-magic-garden.jpg"><img alt="philly magic garden" class="bg-primary align-center" src="../_images/philly-magic-garden.jpg" style="width: 423.5px; height: 317.5px;" /></a>
+</section>
+<hr class="docutils" />
+<section id="id19">
+<h2>超链接<a class="headerlink" href="#id19" title="此标题的永久链接"></a></h2>
+<p>超链接Markdown语法代码：<code class="docutils literal notranslate"><span class="pre">[超链接显示名](超链接地址</span> <span class="pre">&quot;超链接title&quot;)</span></code></p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>这是一个链接 [<span class="nt">Markdown语法</span>](<span class="na">https://markdown.com.cn</span>)
+</pre></div>
+</div>
+<p>显示效果</p>
+<p>这是一个链接 <a class="reference external" href="https://markdown.com.cn">Markdown语法</a></p>
+</section>
+<hr class="docutils" />
+<section id="id20">
+<h2>表格<a class="headerlink" href="#id20" title="此标题的永久链接"></a></h2>
+<p>表格必须使用MyST Markdown格式，否则PDF无法显示。</p>
+<p>list-table 指令用于根据统一的两级项目符号列表中的数据创建表格。 “统一”是指每个子列表（二级列表）必须包含相同数量的列表项。</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>:::{list-table} 表格标题
+:widths: 15 10 30
+:header-rows: 1
+
+<span class="k">*</span><span class="w"> </span>  - <span class="gs">**Treat**</span>
+<span class="w">    </span><span class="k">-</span><span class="w"> </span><span class="gs">**Quantity**</span>
+<span class="w">    </span><span class="k">-</span><span class="w"> </span><span class="gs">**Description**</span>
+<span class="k">*</span><span class="w"> </span>  - Albatross
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>2.99
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>On a stick!
+<span class="k">*</span><span class="w"> </span>  - Crunchy Frog
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>1.49
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>If we took the bones out, it wouldn&#39;t be
+ crunchy, now would it?
+<span class="k">*</span><span class="w"> </span>  - Gannet Ripple
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>1.99
+<span class="w">    </span><span class="k">-</span><span class="w"> </span>On a stick!
+:::
+</pre></div>
+</div>
+<p>显示效果</p>
+<p>:::{list-table} 表格标题
+:widths: 15 10 30
+:header-rows: 1</p>
+<ul class="simple">
+<li><ul>
+<li><p><strong>Treat</strong></p></li>
+<li><p><strong>Quantity</strong></p></li>
+<li><p><strong>Description</strong></p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Albatross</p></li>
+<li><p>2.99</p></li>
+<li><p>On a stick!</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Crunchy Frog</p></li>
+<li><p>1.49</p></li>
+<li><p>If we took the bones out, it wouldn’t be
+crunchy, now would it?</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Gannet Ripple</p></li>
+<li><p>1.99</p></li>
+<li><p>On a stick!
+:::</p></li>
+</ul>
+</li>
+</ul>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id21" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">3</a><span class="fn-bracket">]</span></span>
+<p>This is a manually-numbered footnote definition.</p>
+</aside>
+<aside class="footnote brackets" id="myref" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">1</a><span class="fn-bracket">]</span></span>
+<p>This is an auto-numbered footnote definition.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="../r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6/r128%E9%AA%8C%E8%AF%81%E5%9B%BA%E4%BB%B6%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.html" class="btn btn-neutral float-left" title="RV验证固件" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2025, AWA2253。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
